@@ -1,34 +1,69 @@
 const express = require("express");
 const Promotion = require("../models/promotion");
+const authenticate = require("../authenticate");
+const cors = require("./cors");
 
 const promotionRouter = express.Router();
 
 promotionRouter
   .route("/")
-  // .get as before
-  .post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-    // Admin only POST operation
+  .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+  .get(cors.cors, (req, res, next) => {
+    // Logic for GET
   })
-  // .put as before
-  .delete(
+  .post(
+    cors.corsWithOptions,
     authenticate.verifyUser,
     authenticate.verifyAdmin,
     (req, res, next) => {
-      // Admin only DELETE operation
+      // Logic for POST - Admin only
+    }
+  )
+  .put(
+    cors.corsWithOptions,
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res, next) => {
+      // Logic for PUT - Admin only
+    }
+  )
+  .delete(
+    cors.corsWithOptions,
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res, next) => {
+      // Logic for DELETE - Admin only
     }
   );
 
-ppromotionRouter
+promotionRouter
   .route("/:promotionId")
-  // .get, .post as before
-  .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-    // Admin only PUT operation
+  .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+  .get(cors.cors, (req, res, next) => {
+    // Logic for GET on /:promotionId
   })
-  .delete(
+  .post(
+    cors.corsWithOptions,
     authenticate.verifyUser,
     authenticate.verifyAdmin,
     (req, res, next) => {
-      // Admin only DELETE operation
+      // Logic for POST on /:promotionId - Admin only
+    }
+  )
+  .put(
+    cors.corsWithOptions,
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res, next) => {
+      // Logic for PUT on /:promotionId - Admin only
+    }
+  )
+  .delete(
+    cors.corsWithOptions,
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res, next) => {
+      // Logic for DELETE on /:promotionId - Admin only
     }
   );
 
