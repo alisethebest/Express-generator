@@ -8,6 +8,8 @@ var passport = require("passport");
 var authenticate = require("./authenticate");
 const config = require("./config"); // Only one import needed
 const uploadRouter = require("./routes/uploadRouter");
+const favoriteRouter = require("./routes/favoriteRouter");
+
 
 var app = express();
 
@@ -20,6 +22,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/imageUpload", uploadRouter);
+app.use("/favorites", favoriteRouter);
+
 
 // Session Middleware
 app.use(
