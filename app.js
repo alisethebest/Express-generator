@@ -7,6 +7,7 @@ var FileStore = require("session-file-store")(session);
 var passport = require("passport");
 var authenticate = require("./authenticate");
 const config = require("./config"); // Only one import needed
+const uploadRouter = require("./routes/uploadRouter");
 
 var app = express();
 
@@ -18,6 +19,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/imageUpload", uploadRouter);
 
 // Session Middleware
 app.use(
